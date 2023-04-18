@@ -1,0 +1,14 @@
+fastapi~=0.68.0
+typer~=0.4.0
+uvicorn~=0.12.2
+pydantic[dotenv]~=1.9.0
+SQLAlchemy[asyncio]~=1.4.23
+alembic~=1.7.3
+asyncpg~=0.24.0
+json_logging~=1.3.0
+gunicorn~=20.1.0
+uvloop~=0.16.0
+fastapi-utils~=0.2.1
+starlette_context~=0.3.3
+httptools~=0.5.0
+psycopg2-binary~=2.9.6
