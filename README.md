@@ -50,12 +50,7 @@ touch .env
 alembic upgrade head
 ```
 
-8. Install & run minio
-```shell
-docker-compose up -d minio
-```
-
-9. Run project
+8. Run project
 
 ```shell
 source venv/bin/activate
