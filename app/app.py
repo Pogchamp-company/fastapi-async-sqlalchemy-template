@@ -63,13 +63,13 @@ def init_middlewares(app: FastAPI) -> None:
 
 
 def init_routers(app: FastAPI) -> None:
-    # from app.app_name.api.v1 import router
+    from app.example.crud import example_crud_router
 
     @app.get('/ping')
     async def ping() -> dict[str, bool | str]:
         return {'ok': True, 'detail': 'pong'}
 
-    # app.include_router(router, prefix='/app_name')
+    app.include_router(example_crud_router)
 
 
 def init_errors_handlers(app: FastAPI) -> None:

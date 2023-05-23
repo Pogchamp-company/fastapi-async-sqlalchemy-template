@@ -6,5 +6,5 @@ from manage import app
 
 @pytest.fixture
 def client():
-    client = TestClient(app)
-    yield client
+    with TestClient(app) as client:
+        yield client

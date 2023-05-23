@@ -33,4 +33,4 @@ def clear_db():
 def session() -> Session:
     with session_factory() as session:
         yield session
-    clear_db()
+    # clear_db()
