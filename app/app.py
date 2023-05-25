@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.authentication import AuthenticationError
 from starlette_context import plugins
-from starlette_context.middleware import ContextMiddleware
+from starlette_context.middleware import RawContextMiddleware
 
 from app.core.config import settings
 from app.utils.logs_formatters import JSONRequestLogFormatter, JSONLogWebFormatter
@@ -54,7 +54,7 @@ def init_middlewares(app: FastAPI) -> None:
         allow_headers=["*"],
     )
     app.add_middleware(
-        ContextMiddleware,
+        RawContextMiddleware,
         plugins=(
             plugins.RequestIdPlugin(),
             plugins.CorrelationIdPlugin()

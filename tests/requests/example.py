@@ -1,5 +1,5 @@
-from starlette.testclient import TestClient
+from async_asgi_testclient import TestClient
 
 
-def example_get_request(client: TestClient, example_id: int):
-    return client.get(f'/example/{example_id}')
+async def example_get_request(client: TestClient, example_id: int):
+    return await client.get(f'/example/{example_id}')
