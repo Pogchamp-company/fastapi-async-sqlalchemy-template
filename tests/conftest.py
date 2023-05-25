@@ -1,42 +1,15 @@
-from typing import Generator
-
-import pytest
-from sqlalchemy import create_engine, text
-from sqlalchemy.exc import SQLAlchemyError
-
 from app.core.config import settings
 
 
-# @pytest.fixture(scope="session")
-def setup_db() -> Generator:
-    engine = create_engine(f"{settings.DATABASE_URI.replace('+asyncpg', '')}")
-    conn = engine.connect()
-    # トランザクションを一度終了させる
-    conn.execute(text("commit"))
-    try:
-        conn.execute(text("drop database test"))
-    except SQLAlchemyError:
-        pass
-    finally:
-        conn.close()
+def override_db_name():
+    """Prefix database name with test_"""
+    uri = settings.DATABASE_URI
+    path_start = uri.rfind('/') + 1
+    uri = uri[:path_start] + 'test_' + uri[path_start:]
+    settings.DATABASE_URI = uri
 
-    conn = engine.connect()
-    # トランザクションを一度終了させる
-    conn.execute(text("commit"))
-    conn.execute(text("create database test"))
-    conn.close()
 
-    yield
-
-    conn = engine.connect()
-    # トランザクションを一度終了させる
-    conn.execute(text("commit"))
-    try:
-        conn.execute(text("drop database test"))
-    except SQLAlchemyError:
-        pass
-    conn.close()
-
+override_db_name()
 
 pytest_plugins = [
     "tests.fixtures",

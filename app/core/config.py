@@ -16,10 +16,6 @@ class Settings(BaseSettings):
     def assemble_bool(cls, v: Union[str, bool, None]) -> bool:
         return bool(v)
 
-    @classproperty
-    def TESTING(self) -> bool:
-        return 'pytest' in sys.modules
-
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
 
     @validator('BACKEND_CORS_ORIGINS', pre=True)
@@ -39,9 +35,6 @@ class Settings(BaseSettings):
     @validator('DATABASE_URI', pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> str:
         if isinstance(v, str):
-            if cls.TESTING:
-                path_start = v.rfind('/') + 1
-                v = v[:path_start] + 'test_' + v[path_start:]
             return v
 
         params = dict(scheme='postgresql+asyncpg',
@@ -50,10 +43,6 @@ class Settings(BaseSettings):
                       host=values.get('POSTGRES_SERVER'),
                       path=f"/{values.get('POSTGRES_DB')}"
                       )
-
-        if cls.TESTING:
-            params.update(path=f"/test_{values.get('POSTGRES_DB')}")
-
         return PostgresDsn.build(**params)
 
     class Config:
