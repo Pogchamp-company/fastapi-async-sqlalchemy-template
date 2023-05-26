@@ -34,7 +34,6 @@ async def session() -> AsyncGenerator:
             autocommit=False,
             autoflush=False,
             bind=conn,
-            future=True,
         )
 
         async_session = async_session_factory()
