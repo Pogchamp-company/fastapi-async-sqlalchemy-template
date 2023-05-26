@@ -54,7 +54,7 @@ alembic upgrade head
 
 ```shell
 source venv/bin/activate
-python manage.py serve --workers 1
+python manage.py --workers 1
 ```
 
 ## Run tests
@@ -82,6 +82,7 @@ pytest --cov=app --cov-report=html --cov-config=.coveragerc tests/
 ### Code style
 
 [pep8](https://www.python.org/dev/peps/pep-0008/)
+[FastAPI Best Practices](https://github.com/zhanymkanov/fastapi-best-practices)
 
 ### Branch naming
 
