@@ -25,7 +25,7 @@ Your project description
 1. Clone repo
 
 ```shell
-git clone https://github.com/Pogchamp-company/FastapiTemplate.git
+git clone Your project url
 ```
 
 2. Create Python Virtual Environment
@@ -54,7 +54,7 @@ alembic upgrade head
 
 ```shell
 source venv/bin/activate
-python manage.py serve --workers 1
+python manage.py --workers 1
 ```
 
 ## Run tests
@@ -82,6 +82,7 @@ pytest --cov=app --cov-report=html --cov-config=.coveragerc tests/
 ### Code style
 
 [pep8](https://www.python.org/dev/peps/pep-0008/)
+[FastAPI Best Practices](https://github.com/zhanymkanov/fastapi-best-practices)
 
 ### Branch naming
 
@@ -89,10 +90,10 @@ pytest --cov=app --cov-report=html --cov-config=.coveragerc tests/
 
 ## Environment variables
 
-| Variable             |  Description   |                     Default                      |
-|----------------------|:--------------:|:------------------------------------------------:|
-| DATABASE_URI         | PostgreSQL URI | postgresql+asyncpg://postgres@localhost:5432/fst |
-| BACKEND_CORS_ORIGINS |    Frontend    |                        []                        | 
-| HOST                 |       -        |                    127.0.0.1                     | 
-| PORT                 |       -        |                       8000                       | 
-| DEBUG                |       -        |                      False                       | 
+| Variable             |  Description   |                       Default                        |
+|----------------------|:--------------:|:----------------------------------------------------:|
+| DATABASE_URI         | PostgreSQL URI | postgresql+asyncpg://postgres@localhost:5432/db_name |
+| BACKEND_CORS_ORIGINS |    Frontend    |                          []                          | 
+| HOST                 |       -        |                      127.0.0.1                       | 
+| PORT                 |       -        |                         8000                         | 
+| DEBUG                |       -        |                        False                         | 

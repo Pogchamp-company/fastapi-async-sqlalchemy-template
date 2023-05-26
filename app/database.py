@@ -1,15 +1,15 @@
 import re
 
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
+from sqlalchemy import MetaData
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.inspection import inspect
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import as_declarative, declared_attr
 
 from app.core.config import settings
 
 engine = create_async_engine(settings.DATABASE_URI, echo=False, pool_pre_ping=True)
-async_session = sessionmaker(
-    engine, class_=AsyncSession, expire_on_commit=False, autocommit=False, autoflush=False
+async_session = async_sessionmaker(
+    engine, expire_on_commit=False, autocommit=False, autoflush=False
 )
 
 
@@ -18,7 +18,17 @@ async def get_session() -> AsyncSession:
         yield session
 
 
-@as_declarative()
+POSTGRES_INDEXES_NAMING_CONVENTION = {
+    "ix": "%(column_0_label)s_idx",
+    "uq": "%(table_name)s_%(column_0_name)s_key",
+    "ck": "%(table_name)s_%(constraint_name)s_check",
+    "fk": "%(table_name)s_%(column_0_name)s_fkey",
+    "pk": "%(table_name)s_pkey",
+}
+metadata = MetaData(naming_convention=POSTGRES_INDEXES_NAMING_CONVENTION)
+
+
+@as_declarative(metadata=metadata)
 class BaseModel:
 
     @declared_attr

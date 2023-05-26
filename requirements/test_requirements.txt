@@ -1,0 +1,5 @@
+pytest~=7.3.1
+pytest_asyncio~=0.21.0
+faker~=18.9.0
+pytest-cov~=4.1.0
+async_asgi_testclient~=1.4.11
