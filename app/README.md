@@ -46,5 +46,5 @@ The dependency for obtaining the project's default logger is located in **get_lo
 │   ├── models.py # Sqlalchemy models must contains here<br>
 │   ├── schemas.py # Pydantic models must contains here<br>
 
-Remember to connect your routers in [app.app.init_routers](app.py?L=70)
+Remember to connect your routers in [app.app.init_routers](app.py#L70)
 

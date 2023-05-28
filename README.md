@@ -8,6 +8,7 @@
     * [Code Style](#code-style)
     * [Branch naming](#branch-naming)
 * [Environment variables](#environment-variables)
+* [Project structure](#project-structure)
 
 ## Description
 Your project description
@@ -97,3 +98,6 @@ pytest --cov=app --cov-report=html --cov-config=.coveragerc tests/
 | HOST                 |       -        |                      127.0.0.1                       | 
 | PORT                 |       -        |                         8000                         | 
 | DEBUG                |       -        |                        False                         | 
+
+## Project structure
+Project structure id described [here](app/README.md)
