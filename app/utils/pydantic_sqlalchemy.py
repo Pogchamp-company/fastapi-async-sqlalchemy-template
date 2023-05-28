@@ -4,7 +4,6 @@
 from typing import Container, Optional, Type, Any
 
 from pydantic import BaseConfig, BaseModel, create_model
-from pydantic.config import ConfigType
 from sqlalchemy import Column
 from sqlalchemy.inspection import inspect
 from sqlalchemy.orm.properties import ColumnProperty
@@ -23,7 +22,7 @@ class _OrmConfig(BaseConfig):
 
 
 class _SqlalchemyToPydantic:
-    def __init__(self, db_model: Type, *, config: Type = _OrmConfig, include: Container[str] = ()):
+    def __init__(self, db_model: Type[BaseSqlalchemyModel], *, config: Type = _OrmConfig, include: Container[str] = ()):
         self.db_model = db_model
         self.config = config
         self.include = include
@@ -80,7 +79,7 @@ class _SqlalchemyToPydantic:
 
 
 def sqlalchemy_to_pydantic(
-        db_model: Type, *, config: ConfigType = _OrmConfig, include: Container[str] = (),
+        db_model: Type[BaseSqlalchemyModel], *, config: Type[BaseConfig] = _OrmConfig, include: Container[str] = (),
 ) -> Type[_ResultModel]:
     """
     Transform sqlalchemy model to pydantic model
