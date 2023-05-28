@@ -15,5 +15,10 @@ def serve(workers: int = 1):
               f'--bind {settings.HOST}:{settings.PORT}')
 
 
+@cli.command()
+def stub():
+    pass
+
+
 if __name__ == '__main__':
     cli()
