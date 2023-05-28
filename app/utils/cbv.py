@@ -1,3 +1,7 @@
+# This code from https://gist.github.com/dmontagu/87e9d3d7795b14b63388d4b16054f0ff
+# I don`t use fastapi-utils because it does not support SQLAlchemy 2.0
+
+
 import inspect
 from typing import Any, Callable, List, Type, TypeVar, Union, get_type_hints
 

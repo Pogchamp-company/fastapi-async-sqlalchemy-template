@@ -18,7 +18,7 @@ def _get_logger() -> logging.Logger:
 def authentication_handler(_: Request, exc: AuthenticationError) -> JSONResponse:
     return JSONResponse(
         status_code=HTTPStatus.UNAUTHORIZED,
-        content={"detail": 'Не удалось авторизоваться'}
+        content={"detail": 'Failed to authenticate'}
     )
 
 
@@ -26,7 +26,7 @@ def db_error(_: Request, exc: SQLAlchemyError) -> JSONResponse:
     _get_logger().critical(f'Error in database ({exc.__class__.__name__}): {exc}')
     return JSONResponse(
         status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-        content={"detail": f'Произошла непредвиденная ошибка. Мы уже работаем на ее исправлением'}
+        content={"detail": f'An unexpected error occurred. We are already working on fixing it'}
     )
 
 
@@ -42,5 +42,5 @@ def internal_server_error_handler(_: Request, exc: Exception) -> JSONResponse:
     _get_logger().critical(f'Unhandled error ({exc.__class__.__name__}): {exc}')
     return JSONResponse(
         status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-        content={"detail": f"Произошла непредвиденная ошибка. Мы уже работаем на ее исправлением"}
+        content={"detail": f"An unexpected error occurred. We are already working on fixing it"}
     )

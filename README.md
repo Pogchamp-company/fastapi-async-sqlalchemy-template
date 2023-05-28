@@ -32,7 +32,7 @@ git clone Your project url
 3. Install requirements
 
 ```shell
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 ```
 
 4. Create PostgreSQL database
@@ -54,7 +54,7 @@ alembic upgrade head
 
 ```shell
 source venv/bin/activate
-python manage.py --workers 1
+python manage.py serve --workers 1
 ```
 
 ## Run tests

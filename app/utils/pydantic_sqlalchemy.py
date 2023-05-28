@@ -1,3 +1,6 @@
+# Based on https://github.com/tiangolo/pydantic-sqlalchemy
+
+
 from typing import Container, Optional, Type, Any
 
 from pydantic import BaseConfig, BaseModel, create_model
@@ -5,6 +8,14 @@ from pydantic.config import ConfigType
 from sqlalchemy import Column
 from sqlalchemy.inspection import inspect
 from sqlalchemy.orm.properties import ColumnProperty
+
+from app.database import BaseModel as BaseSqlalchemyModel
+
+
+class _ResultModel(BaseModel):
+    @property
+    def default_obj(self) -> BaseSqlalchemyModel:
+        ...
 
 
 class _OrmConfig(BaseConfig):
@@ -48,7 +59,7 @@ class _SqlalchemyToPydantic:
             return False
         return not (attr.key not in self.include and self.include)
 
-    def __call__(self) -> Type[BaseModel]:
+    def __call__(self) -> Type[_ResultModel]:
         mapper = inspect(self.db_model)
         fields = {}
         for attr in mapper.attrs:
@@ -63,12 +74,14 @@ class _SqlalchemyToPydantic:
         pydantic_model = create_model(
             self.db_model.__name__, __config__=self.config, **fields,
         )
+
+        pydantic_model.default_obj = property(lambda _: self.db_model())
         return pydantic_model
 
 
 def sqlalchemy_to_pydantic(
         db_model: Type, *, config: ConfigType = _OrmConfig, include: Container[str] = (),
-) -> Type[BaseModel]:
+) -> Type[_ResultModel]:
     """
     Transform sqlalchemy model to pydantic model
     :param db_model: Sqlalchemy model
