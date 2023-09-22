@@ -1,4 +1,4 @@
-# This code from https://gist.github.com/dmontagu/87e9d3d7795b14b63388d4b16054f0ff
+# This code from https://github.com/dmontagu/fastapi-utils/blob/master/fastapi_utils/cbv.py
 # I don`t use fastapi-utils because it does not support SQLAlchemy 2.0
 
 
@@ -7,7 +7,7 @@ from collections.abc import Callable
 from typing import Any, TypeVar, get_type_hints
 
 from fastapi import APIRouter, Depends
-from pydantic.typing import is_classvar
+from pydantic.v1.typing import is_classvar  # todo remove use of v1
 from starlette.routing import Route, WebSocketRoute
 
 T = TypeVar("T")

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import ConfigDict, BaseModel
 
 
 class BasePydanticModel(BaseModel):
@@ -24,6 +24,4 @@ class BasePydanticModel(BaseModel):
                 setattr(obj, field_name, obj_value)
 
             form_value.populate_obj(obj_value)
-
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

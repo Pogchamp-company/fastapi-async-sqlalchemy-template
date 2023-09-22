@@ -1,4 +1,4 @@
-import alembic_postgresql_enum
+import alembic_postgresql_enum  # noqa: F401 # import activates the plugin
 import asyncio
 from logging.config import fileConfig
 

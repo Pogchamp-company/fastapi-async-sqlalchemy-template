@@ -7,7 +7,7 @@ from sqlalchemy.orm import as_declarative, declared_attr
 
 from app.core.config import settings
 
-engine = create_async_engine(settings.DATABASE_URI, echo=False, pool_pre_ping=True)
+engine = create_async_engine(str(settings.DATABASE_URI), echo=False, pool_pre_ping=True)
 async_session = async_sessionmaker(
     engine, expire_on_commit=False, autocommit=False, autoflush=False
 )

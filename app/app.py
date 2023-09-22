@@ -32,7 +32,7 @@ def get_application() -> FastAPI:
 def override_422_docs() -> None:
     from app.errors_handlers.schemas import ErrorResponse
     import fastapi.openapi.utils as fu
-    fu.validation_error_response_definition = ErrorResponse.schema()
+    fu.validation_error_response_definition = ErrorResponse.model_json_schema()
 
 
 def init_extensions(app: FastAPI) -> None:

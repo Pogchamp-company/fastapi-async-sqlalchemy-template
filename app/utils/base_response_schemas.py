@@ -1,5 +1,5 @@
 from fastapi import status
-from pydantic import BaseModel
+from pydantic import ConfigDict, BaseModel
 
 
 class BaseActionResponse(BaseModel):
@@ -12,11 +12,9 @@ class ActionResponseWithDetails(BaseActionResponse):
 
 class HTTPError(BaseModel):
     detail: str
-
-    class Config:
-        schema_extra = {
-            "example": {"detail": "HTTPException raised."},
-        }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {"detail": "HTTPException raised."},
+    })
 
 
 base_responses = {

@@ -4,7 +4,7 @@ from http import HTTPStatus
 from fastapi import Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from pydantic.error_wrappers import display_errors
+from pydantic.v1.error_wrappers import display_errors  # todo remove use of v1
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.authentication import AuthenticationError
 

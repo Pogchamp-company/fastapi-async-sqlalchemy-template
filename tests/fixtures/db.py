@@ -14,7 +14,7 @@ from manage import app
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_db() -> Generator:
-    engine = create_engine(settings.DATABASE_URI.replace('+asyncpg', ''))
+    engine = create_engine(str(settings.DATABASE_URI).replace('+asyncpg', ''))
 
     with engine.begin():
         BaseModel.metadata.drop_all(engine)
@@ -26,7 +26,7 @@ def setup_test_db() -> Generator:
 @pytest_asyncio.fixture(autouse=True)
 async def session() -> AsyncGenerator:
     # https://github.com/sqlalchemy/sqlalchemy/issues/5811#issuecomment-756269881
-    async_engine = create_async_engine(settings.DATABASE_URI)
+    async_engine = create_async_engine(str(settings.DATABASE_URI))
     async with async_engine.connect() as conn:
         await conn.begin()
         await conn.begin_nested()
